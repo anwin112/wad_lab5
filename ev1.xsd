@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://xyz.com/ev"
+           xmlns="http://xyz.com/ev"
+           elementFormDefault="qualified">
+
+    <!-- Root element -->
+    <xs:element name="ev">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="vehicle" type="vehicleType"/>
+                <xs:element name="charging_station" type="chargingStationType"/>
+                <xs:element name="hotel" type="hotelType"/>
+                <xs:element name="feedback" type="feedbackType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- vehicleType definition -->
+    <xs:complexType name="vehicleType">
+        <xs:sequence>
+            <xs:element name="model" type="xs:string"/>
+            <xs:element name="range">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="1"/>
+                        <xs:maxInclusive value="1000"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="battery_capacity">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal">
+                        <xs:minInclusive value="1.0"/>
+                        <xs:maxInclusive value="200.0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- chargingStationType definition -->
+    <xs:complexType name="chargingStationType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="location" type="xs:string"/>
+            <xs:element name="charger_type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="AC Charger"/>
+                        <xs:enumeration value="DC Fast Charger"/>
+                        <xs:enumeration value="Level 2 Charger"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- hotelType definition -->
+    <xs:complexType name="hotelType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="location" type="xs:string"/>
+            <xs:element name="rating">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal">
+                        <xs:minInclusive value="0.0"/>
+                        <xs:maxInclusive value="5.0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- feedbackType definition -->
+    <xs:complexType name="feedbackType">
+        <xs:sequence>
+            <xs:element name="comment" type="xs:string"/>
+            <xs:element name="rating">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="1"/>
+                        <xs:maxInclusive value="5"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="feedback_type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Travel Experience"/>
+                        <xs:enumeration value="Charging Station"/>
+                        <xs:enumeration value="Hotel Stay"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
